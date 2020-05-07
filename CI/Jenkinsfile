@@ -23,7 +23,7 @@ node {
     stage "Check YUM repo"
         sh "sudo yum clean all"
         sh "sudo yum update -y"
-        sh "sudo yum info aik-app-ui\$(git rev-parse --short HEAD)"
+        sh "sudo yum info aik-app-ui-\$(git rev-parse --short HEAD)"
     stage "Trigger downstream"
 
         def versionApp = sh returnStdout: true, script:"printf \$(git rev-parse --short HEAD)"
