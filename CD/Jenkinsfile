@@ -81,7 +81,4 @@ node {
           echo 'Tests OK'; \
         fi \
        "
-
-    stage "Trigger downstream"
-    build job: "aik-cdeployment", parameters: [[$class: "StringParameterValue", name: "AMI_ID", value: "${amiId}"]], wait: false
 }
