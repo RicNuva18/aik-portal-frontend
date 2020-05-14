@@ -1,6 +1,10 @@
 #!groovy
 
 node {
+  
+  parameters {
+        string(defaultValue: "Este es el valor Incorrecto", description: 'K', name: 'APP_VERSION')
+  }
 
   step([$class: 'WsCleanup'])
 
