@@ -41,21 +41,8 @@
       {
         "type": "salt-masterless",
         "skip_bootstrap": true,
-        "local_state_tree": "Configuration_management/Configuration_management/states",
-        "local_pillar_roots": "Configuration_management/Configuration_management/pillars"
-      },
-      {
-        "type": "file",
-        "source": "CDelivery/serverspec",
-        "destination": "/tmp/"
-      },
-      
-      {
-        "type": "shell",
-        "execute_command": "sudo -S bash '{{.Path}}'",
-        "script": "CDelivery/packer/installRuby.sh",
-        "skip_clean": "true"
-        
+        "local_state_tree": "Configuration_management/configuration_management/states",
+        "local_pillar_roots": "Configuration_management/configuration_management/pillars"
       }
       
     ]
