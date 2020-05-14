@@ -9,7 +9,7 @@ node {
 
   stage "Checkout additional repos"
     dir("Configuration_management") {
-      git "https://github.com/icesi-ops/aik-portal"
+      git "https://github.com/dvlopez9811/aik-infrastructure"
     }
 
   stage "Run Packer"
