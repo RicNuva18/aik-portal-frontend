@@ -29,9 +29,9 @@ node {
     def instanceType = "t2.micro"
     def subnetId = "subnet-0886c90314d0a1c3e"
 
-    sh "tail -n1 CDelivery/packer/packer.log"
-    sh "cat CDelivery/packer/packer.log"
-    echo "Esto tiene packer.log \$(cat CDelivery/packer/packer.log)"
+    sh "tail -n1 CD/Packer/packer.log"
+    sh "cat CD/Packer/packer.log"
+    echo "Esto tiene packer.log \$(cat CD/Packer/packer.log)"
     echo "Launching an instance from ${amiId}"
     sh "aws ec2 run-instances \
         --region us-east-1 \
@@ -47,7 +47,7 @@ node {
 
     sh "aws ec2 create-tags --resources ${instanceId} \
         --region us-east-1 \
-        --tags Key=Name,Value=\"Jenkins (aik-app-$APP_VERSION)\" Key=CreatedBy,Value=Jenkins \"
+  --tags Key=Name,Value=\"Jenkins (aik-app-${params.APP_VERSION})\" Key=CreatedBy,Value=Jenkins \"
     
     echo "Waiting for the instance to come into service"
     aws ec2 wait instance-running --instance-ids ${instanceId}
