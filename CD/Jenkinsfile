@@ -34,7 +34,7 @@ node {
     echo "Esto tiene packer.log \$(cat CD/Packer/packer.log)"
     echo "Launching an instance from ${amiId}"
     sh "aws ec2 run-instances \
-        --region us-east-1 \
+        --region us-west-2 \
         --image-id ${amiId} \
         --key-name ${ec2Keypair} \
         --security-group-ids ${secGroup} \
@@ -55,7 +55,7 @@ node {
     echo "Registering with ELB"
     def elbId = "alb-aik"
     sh "aws elbv2 register-targets \
-    --region us-east-1 \
-    --target-group-arn arn:aws:elasticloadbalancing:us-east-1:382356559478:targetgroup/alb-aik/8330c53354f19757 \
+    --region us-west-2 \
+    --target-group-arn arn:aws:elasticloadbalancing:us-west-2:382356559478:targetgroup/alb-aik/8330c53354f19757 \
     --targets Id=${instanceId}"
 }
