@@ -17,7 +17,6 @@ node {
     }
 
   stage "Run Packer"
-    sh "echo ${APP_VERSION}"
-    sh "/opt/packer validate -var=\"appVersion=$APP_VERSION\" -var-file=CD/packer/aik-app_vars.json CD/packer/aik-app.json"
-    sh "/opt/packer build -machine-readable -var=\"appVersion=$APP_VERSION\" -var-file=CD/packer/aik-app_vars.json CD/packer/aik-app.json | tee CD/packer/packer.log"
+    sh "/opt/packer validate -var="appVersion=$APP_VERSION" -var-file=CD/packer/aik-app_vars.json CD/packer/aik-app.json"
+    sh "/opt/packer build -machine-readable -var="appVersion=$APP_VERSION" -var-file=CD/packer/aik-app_vars.json CD/packer/aik-app.json | tee CD/packer/packer.log"
 }
