@@ -51,7 +51,7 @@ node {
         --tags Key=Name,Value=\"Jenkins (aik-app-${params.APP_VERSION})\" Key=CreatedBy,Value=Jenkins"
     
     echo "Waiting for the instance to come into service"
-    aws ec2 wait instance-running --instance-ids ${instanceId}
+    sh "aws ec2 wait instance-running --instance-ids ${instanceId}"
     sleep 60
     echo "Registering with ELB"
     def elbId = "alb-aik"
