@@ -45,4 +45,19 @@ node {
        "
   
     def instanceId = sh returnStdout: true, script: "printf \$(jq .Instances[0].InstanceId < .ec2_run-instances.log)"
+  
+    sh "aws ec2 create-tags --resources ${instanceId} \
+        --region us-west-2 \
+  --tags Key=Name,Value=\"Jenkins (aik-app-${params.APP_VERSION})\" Key=CreatedBy,Value=Jenkins \"
+    
+    echo "Waiting for the instance to come into service"
+    aws ec2 wait instance-running --instance-ids ${instanceId}
+    sleep 60
+    echo "Registering with ELB"
+    def elbId = "alb-aik"
+    sh "aws elbv2 register-targets \
+    --region us-west-2 \
+    --target-group-arn arn:aws:elasticloadbalancing:us-west-2:682086073548:targetgroup/aik-target-group/acc415ab4c36a861 \
+    --targets Id=${instanceId}"
+
 }
