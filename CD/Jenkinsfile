@@ -33,4 +33,14 @@ node {
     sh "cat CD/Packer/packer.log"
     echo "Esto tiene packer.log \$(cat CD/Packer/packer.log)"
     echo "Launching an instance from ${amiId}"
+  
+    sh "aws ec2 run-instances \
+        --region us-west-2 \
+        --image-id ${amiId} \
+        --key-name ${ec2Keypair} \
+        --security-group-ids ${secGroup} \
+        --instance-type ${instanceType} \
+        --subnet-id ${subnetId} \
+        | tee .ec2_run-instances.log \
+       "
 }
