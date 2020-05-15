@@ -28,4 +28,9 @@ node {
     def secGroup = "sg-0f1c0b065c263e578"
     def instanceType = "t2.micro"
     def subnetId = "subnet-0d1bf3e4af65144ce"
+  
+    sh "tail -n1 CD/packer/packer.log"
+    sh "cat CD/packer/packer.log"
+    echo "Esto tiene packer.log \$(cat CD/packer/packer.log)"
+    echo "Launching an instance from ${amiId}"
 }
