@@ -13,7 +13,7 @@ node {
 
   stage "Checkout additional repos"
     dir("Configuration_management") {
-      git "https://github.com/dvlopez9811/aik-infrastructure"
+      git "https://github.com/RicNuva18/aik-portal-frontend"
     }
 
   stage "Run Packer"
