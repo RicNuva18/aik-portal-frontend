@@ -48,5 +48,5 @@ node {
 
     sh "aws ec2 create-tags --resources ${instanceId} \
         --region us-west-2 \
-  --tags Key=Name,Value=\"Jenkins (aik-app-${params.APP_VERSION})\" Key=CreatedBy,Value=Jenkins \"
+        --tags Key=Name,Value=\"Jenkins (aik-app-${params.APP_VERSION})\" Key=CreatedBy,Value=Jenkins \"
 }
