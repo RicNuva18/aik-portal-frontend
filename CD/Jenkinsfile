@@ -28,34 +28,4 @@ node {
     def secGroup = "sg-0f1c0b065c263e578"
     def instanceType = "t2.micro"
     def subnetId = "subnet-0d1bf3e4af65144ce"
-
-    sh "tail -n1 CD/Packer/packer.log"
-    sh "cat CD/Packer/packer.log"
-    echo "Esto tiene packer.log \$(cat CD/Packer/packer.log)"
-    echo "Launching an instance from ${amiId}"
-    sh "aws ec2 run-instances \
-        --region us-west-2 \
-        --image-id ${amiId} \
-        --key-name ${ec2Keypair} \
-        --security-group-ids ${secGroup} \
-        --instance-type ${instanceType} \
-        --subnet-id ${subnetId} \
-        | tee .ec2_run-instances.log \"
-
-    
-    def instanceId = sh returnStdout: true, script: "printf \$(jq .Instances[0].InstanceId < .ec2_run-instances.log)"
-
-    sh "aws ec2 create-tags --resources ${instanceId} \
-        --region us-east-1 \
-  --tags Key=Name,Value=\"Jenkins (aik-app-${params.APP_VERSION})\" Key=CreatedBy,Value=Jenkins \"
-    
-    echo "Waiting for the instance to come into service"
-    aws ec2 wait instance-running --instance-ids ${instanceId}
-    sleep 60
-    echo "Registering with ELB"
-    def elbId = "alb-aik"
-    sh "aws elbv2 register-targets \
-    --region us-west-2 \
-    --target-group-arn arn:aws:elasticloadbalancing:us-west-2:682086073548:targetgroup/aik-target-group/acc415ab4c36a861 \
-    --targets Id=${instanceId}"
 }
